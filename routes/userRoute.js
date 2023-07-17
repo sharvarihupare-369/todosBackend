@@ -2,11 +2,9 @@ const express = require("express")
 const bcrypt = require("bcrypt")
 const jwt= require("jsonwebtoken")
 const mykey = process.env.JWT_SECRET
-const rkey = process.env.JWT_REFRESH_KEY
 const UserModel = require("../models/userModel")
 const registerMiddleware = require("../middlewares/registermiddleware")
-const BlackListModel = require("../models/blackListModel")
-const auth = require("../middlewares/authMiddleware")
+const BlackListModel = require("../models/blackListModel")  
 const userRouter = express.Router()
 
 

@@ -3,7 +3,7 @@ const app = express()
 const cors = require("cors")
 require('dotenv').config();
 const Port =  process.env.PORT
-const connection = require("./.configs/db");
+const connection = require("./db");
 const todoRoute = require("./routes/todoRoute");
 const userRouter = require("./routes/userRoute");
 app.use(express.json())
