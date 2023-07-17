@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt")
 const jwt= require("jsonwebtoken")
 const mykey = process.env.JWT_SECRET
 const UserModel = require("../models/userModel")
-const registerMiddleware = require("../middlewares/registermiddleware")
+const registerMiddleware = require("../middlewares/registerMiddleware")
 const BlackListModel = require("../models/blackListModel")  
 const userRouter = express.Router()
 
