@@ -13,7 +13,7 @@ userRouter.post("/register",registerMiddleware,async(req,res)=>{
     try {
       const newPass = await bcrypt.hash(pass,10)
       const user = await UserModel.create({...req.body,pass:newPass})
-      res.send({msg:"User registered successfully",user}) 
+      res.status(200).send({"msg":"User registered successfully",user}) 
     } catch (error) {
         res.status(400).send({msg:error.message})
     }
