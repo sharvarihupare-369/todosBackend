@@ -41,7 +41,21 @@ todoRoute.get("/",auth,async(req,res)=>{
 })
 
 
-
+todoRoute.patch("/toggle/:id",auth,async(req,res)=>{
+    const id = req.params.id;
+    const userId = req.userId;
+    const user = await TodoModel.findOne({_id:id})
+    try {
+        if(userId == user.userId.toString()){
+            const updatedTodo = await TodoModel.findByIdAndUpdate({_id:id},{$set:{status: !user.status}},{new:true})
+            res.status(200).send({msg: "Todo status toggled successfully", updatedTodo})
+        }else{
+            res.status(400).send({ msg: "You are not allowed to update" });
+        }
+    } catch (error) {
+        res.status(400).send({'errormsg':error.message})
+    }
+})
 
 todoRoute.patch("/update/:id",auth,async(req,res)=>{
     const id = req.params.id;
