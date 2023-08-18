@@ -29,7 +29,7 @@ const todoSchema = mongoose.Schema({
         required: true
     },
     status: {
-        type: String,
+        type: Boolean,
         required : true
     },
     userId : {type : mongoose.Schema.Types.ObjectId, ref : 'user', required : true},
