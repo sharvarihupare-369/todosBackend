@@ -24,16 +24,19 @@ todoRoute.get("/",auth,async(req,res)=>{
     const page = req.query.page
     const limit = req.query.limit;
 
+    const total = await TodoModel.countDocuments({userId})
+
+
     try {
        let pageNum = +page || 1
        let skip = (pageNum-1) * limit
        let limitPage = +limit || 5      
         if(q){
             const todos = await TodoModel.find({ title: { $regex: q, $options: "i" } , userId }).skip(skip).limit(limitPage)
-            res.status(200).send(todos)
+            res.status(200).send({todos,total})
         }else{
             const todos = await TodoModel.find({userId}).skip(skip).limit(limitPage)
-            res.status(200).send(todos)
+            res.status(200).send({todos,total})
         }
     } catch (error) {
         res.status(400).send({'errormsg':error.message})
