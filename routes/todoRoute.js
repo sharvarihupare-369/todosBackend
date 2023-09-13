@@ -30,12 +30,14 @@ todoRoute.get("/",auth,async(req,res)=>{
     try {
        let pageNum = +page || 1
        let skip = (pageNum-1) * limit
-       let limitPage = +limit || 5      
+       let limitPage = +limit || 5     
+   
+       const sort = { created_at: -1 }; 
         if(q){
-            const todos = await TodoModel.find({ title: { $regex: q, $options: "i" } , userId }).skip(skip).limit(limitPage)
+            const todos = await TodoModel.find({ title: { $regex: q, $options: "i" } , userId }).sort(sort).skip(skip).limit(limitPage)
             res.status(200).send({todos,total})
         }else{
-            const todos = await TodoModel.find({userId}).skip(skip).limit(limitPage)
+            const todos = await TodoModel.find({userId}).sort(sort).skip(skip).limit(limitPage)
             res.status(200).send({todos,total})
         }
     } catch (error) {
